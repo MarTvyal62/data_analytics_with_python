@@ -14,3 +14,16 @@ def income_band(income, low=80000, high=170000):
         return "Medium"
     else:
         return "High"
+    
+
+def get_dependant_category(n_dependants):
+    if n_dependants == 0:
+        return "No dependants"
+    elif n_dependants <= 2:
+        return "Small family"
+    else:
+        return "Large family"
+    
+def set_senior_flag(age):
+        return 'Senior' if age >= 60 else 'Non-Senior'
+    
