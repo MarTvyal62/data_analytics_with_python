@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import io
 
-def download_and_save(url, file_path, extention=".csv"):
+def download_and_save_df(url, file_path, extention=".csv"):
     """
     Download a file from a URL and save it locally.
     
@@ -49,8 +49,28 @@ def download_and_save(url, file_path, extention=".csv"):
     
     return df
     
+def download_and_save_csv(url, file_path):
+    """
+    Download a CSV file from a URL and save it locally.
+    
+    Parameters:
+    -----------
+    url : str
+        URL to download the CSV file from
+    file_path : str
+        Local file path where the CSV file will be saved
 
+    Returns:
+    --------
+    None
+        Saves the CSV file locally
+    """
+    response = requests.get(url)
+    response.raise_for_status()
 
+    df = pd.read_csv(io.StringIO(response.text))
+
+    df.to_csv(file_path, index=False) 
 
 
 def age_group_label(age, minor_threshold=30, senior_threshold=60):
